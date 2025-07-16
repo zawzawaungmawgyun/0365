@@ -1,3 +1,13 @@
 Install-Module Microsoft.Graph -Scope CurrentUser
 Connect-MgGraph -Scopes "User.Read.All", "Organization.Read.All", "Directory.Read.All"
 Get-MgSubscribedSku
+
+
+# Connect to Teams
+Connect-MicrosoftTeams
+
+# Get all teams
+Get-Team
+
+# Or get a specific team
+Get-Team -DisplayName "Your Team Name"
