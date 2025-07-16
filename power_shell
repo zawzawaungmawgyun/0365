@@ -11,3 +11,71 @@ Get-Team
 
 # Or get a specific team
 Get-Team -DisplayName "Your Team Name"
+
+
+
+Option 1: Using Microsoft Graph PowerShell (Recommended for future-proofing)
+Step 1: Install Microsoft Graph Module
+powershell
+Copy
+Edit
+Install-Module Microsoft.Graph -Scope CurrentUser
+Step 2: Connect to Microsoft Graph
+powershell
+Copy
+Edit
+Connect-MgGraph -Scopes "Group.Read.All"
+A login popup will appear. Sign in as a global admin or group admin.
+
+Step 3: Get all Microsoft 365 Groups
+powershell
+Copy
+Edit
+Get-MgGroup -Filter "groupTypes/any(c:c eq 'Unified')" -All
+This filters only Microsoft 365 Groups (Unified groups).
+
+✅ Option 2: Using AzureAD PowerShell Module (Legacy)
+Step 1: Install the AzureAD Module
+powershell
+Copy
+Edit
+Install-Module AzureAD
+Step 2: Connect to Azure AD
+powershell
+Copy
+Edit
+Connect-AzureAD
+Step 3: List All Microsoft 365 Groups
+powershell
+Copy
+Edit
+Get-AzureADGroup | Where-Object {$_.GroupTypes -contains "Unified"}
+✅ Option 3: Using Exchange Online PowerShell
+Step 1: Connect to Exchange Online
+powershell
+Copy
+Edit
+Connect-ExchangeOnline
+Step 2: Get All Microsoft 365 Groups
+powershell
+Copy
+Edit
+Get-UnifiedGroup
+This gives you group name, email address, alias, access type, etc.
+
+✅ To Get a Specific Group by Name or ID
+Microsoft Graph
+powershell
+Copy
+Edit
+Get-MgGroup -GroupId "<GroupID>"
+AzureAD
+powershell
+Copy
+Edit
+Get-AzureADGroup -ObjectId "<GroupID>"
+Exchange
+powershell
+Copy
+Edit
+Get-UnifiedGroup -Identity "Group Name"
